@@ -1,0 +1,177 @@
+1.	
+Display all the information of the emp table.
+SELECT * FROM EMP;
+2.	
+Display unique jobs from EMP table.
+SELECT DISTINCT JOB FROM EMP;
+3.	
+List the details of the emps in asc order of their salaries.
+SELECT * FROM EMP ORDER BY SAL ASC;
+4.	
+List the details of the emps in asc order of the Deptnos and desc of Jobs.
+SELECT * FROM EMP ORDER BY DEPTNO ASC, JOB DESC;
+5.	
+Display all the unique job groups in the descending order
+SELECT DISTINCT JOB FROM EMP ORDER BY JOB DESC;
+6.	
+Display all the details of all managers
+SELECT * FROM EMP WHERE JOB = 'MANAGER';
+7.	
+List the emps who joined before 1981.
+SELECT * FROM EMP WHERE HIREDATE < '1981-01-01'; 
+8.	
+List the Empno, Ename, Sal, Annual  Sal of all Employees in the ASC order of AnnSal.
+SELECT EMPNO, ENAME, SAL, (SAL * 12) AS 'ANNUAL SAL' FROM EMP ORDER BY (SAL * 12) ASC;
+9.	
+Display the empno , ename, job, hiredate, except  of all managers
+SELECT EMPNO, ENAME, JOB, HIREDATE FROM EMP WHERE JOB != 'MANAGER';
+10.	
+List the empno, ename, sal, of all emps working for Mgr 7839.
+SELECT EMPNO, ENAME, SAL FROM EMP WHERE MGR = 7839;
+11.	
+List the emps in the asc order of Designations
+SELECT * FROM EMP ORDER BY JOB ASC;
+12.	
+Display the details of the emps whose Comm is more than their sal.
+SELECT * FROM EMP WHERE COMM > SAL;
+13.	
+List the emps whose daily sal is more than Rs.100.
+SELECT * FROM EMP WHERE (SAL / 30) > 100;
+14.	
+List the emps who are either ‘CLERK’ or ‘ANALYST’ in the desc order of salary
+SELECT * FROM EMP WHERE JOB IN ('CLERK', 'ANALYST') ORDER BY SAL DESC;
+15.	
+List the emps who are working for the deptno 10 and  20
+SELECT * FROM EMP WHERE DEPTNO IN (10, 20);
+16.	
+List the emps who are joined in the year 1981
+SELECT * FROM EMP WHERE YEAR(HIREDATE) = 1981;
+17.	
+List the emps who are joined in the month of Aug 1980
+SELECT * FROM EMP WHERE MONTH(HIREDATE) = 8 AND YEAR(HIREDATE) = 1980;
+18.	
+List the emps whose annul sal (sal*12)ranging from 22000 and 45000
+SELECT * FROM EMP WHERE (SAL * 12) BETWEEN 22000 AND 45000;
+19.	
+List the emps those are having five characters in their names.
+SELECT * FROM EMP WHERE ENAME LIKE '_____';
+20.	
+List the enames those are starting with ‘s’ and with fire characters
+SELECT ENAME FROM EMP WHERE ENAME LIKE 'S____';
+21.	
+List the emps those are having four chars in name and third char must be ‘r’
+SELECT * FROM EMP WHERE ENAME LIKE '__R_';
+22.	
+List the 5 character names starting with ‘s’ and ending with ‘h’
+SELECT ENAME FROM EMP WHERE ENAME LIKE 'S%H';
+23.	
+List the emps who joined in January
+SELECT * FROM EMP WHERE MONTH(HIREDATE) = 1;
+24.	
+List the emps who joined in the month of which second character is ‘a’
+SELECT * FROM EMP WHERE MONTH(HIREDATE) IN (1, 3, 5);
+25.	
+List the emps whose names having a character set ‘ll’ together
+SELECT * FROM EMP WHERE ENAME LIKE '%LL%';
+26.	
+List the emps those who joined in 80’s
+SELECT * FROM EMP WHERE YEAR(HIREDATE) BETWEEN 1980 AND 1989;
+27.	
+List the emps who does not belong to deptno 20
+SELECT * FROM EMP WHERE DEPTNO != 20;
+28.	
+List all the emps except ‘president’ & ‘Mgr’ in asc order of salaries
+SELECT * FROM EMP WHERE JOB NOT IN ('PRESIDENT', 'MANAGER') ORDER BY SAL ASC;
+29.	
+List the emps who joined before or after 1981
+SELECT * FROM EMP WHERE YEAR(HIREDATE) != 1981;
+30.	
+List the emps who joined in any year but not belongs to the month of March
+SELECT * FROM EMP WHERE MONTH(HIREDATE) != 3;
+31.	
+List all the clerks of deptno 20.
+SELECT * FROM EMP WHERE JOB = 'CLERK' AND DEPTNO = 20;
+32.	
+List the emps of deptno 30 and 10 joined in the year 1981
+SELECT * FROM EMP WHERE DEPTNO IN (30, 10) AND YEAR(HIREDATE) = 1981;
+33.	
+Display the details of ‘Smith’
+SELECT * FROM EMP WHERE ENAME = 'SMITH';
+35.	
+Increase the salary of all the employees by 15% .
+UPDATE EMP SET SAL = SAL * 1.15;
+#UPDATE EMP SET SAL = SAL / 1.15;
+36.	
+Change the name of ALLEN to BEN
+UPDATE EMP SET ENAME = 'BEN' WHERE ENAME = 'ALLEN';
+#UPDATE EMP SET ENAME = 'ALLEN' WHERE ENAME = 'BEN';
+37.	
+Increase the commission of  all salesman by 10%of their salary.
+UPDATE EMP SET COMM = SAL * 1.10 WHERE JOB = 'SALESMAN';
+#UPDATE EMP SET COMM = SAL / 1.10 WHERE JOB = 'SALESMAN';
+38.	
+Add a column address of char(20).
+ALTER TABLE EMP ADD COLUMN ADDRESS char(20);
+#ALTER TABLE EMP DROP COLUMN address;
+41.	
+Display the deptno and no:of empls in each dept
+SELECT DEPTNO, COUNT(*) FROM EMP GROUP BY DEPTNO;
+42.	
+Display the jobs and no:of empls in each job
+SELECT JOB, COUNT(*) FROM EMP GROUP BY JOB;
+43.	
+Display the job and average sal of each job
+SELECT JOB, AVG(SAL) FROM EMP GROUP BY JOB;
+44.	
+Display the department and maximum sal of each deptment
+SELECT DEPTNO, MAX(SAL) FROM EMP GROUP BY DEPTNO;
+45.	
+Display the average salary , maximum salary and minimum salary for each department
+SELECT DEPTNO, AVG(SAL), MAX(SAL), MIN(SAL) FROM EMP GROUP BY DEPTNO;
+46.	
+Display the job and no:of empls in each job where no:of empls less than 2
+SELECT JOB, COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) < 2;
+47.	
+Display the job and average sal of each job whose average salary >1200
+SELECT JOB, AVG(SAL) FROM EMP GROUP BY JOB HAVING AVG(SAL) > 1200;
+48.	
+Display the deptno and no:of empls in each dept whose no:of empls is greater than 2.
+SELECT DEPTNO, COUNT(*) FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 2;
+49.	
+Display the average salary , maximum salary and minimum salary job wise
+SELECT JOB, AVG(SAL), MAX(SAL), MIN(SAL) FROM EMP GROUP BY JOB;
+50.	
+Display the department , and no:of empls in each department where no:of employees is greater than 2
+SELECT DEPTNO, COUNT(*) FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 2;
+51.	
+Display Empno,ename,deptno,dname for all the employees
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO;
+52.	
+Display Empno,ename,deptno,dname for all the employees for those employees of deptno 10
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND EMP.DEPTNO = 10;
+53.	
+Display Empno,ename,sal,job,deptno,dname, loc for all the employees working as Analyst
+SELECT EMPNO, ENAME, SAL, JOB, EMP.DEPTNO, DNAME, LOC FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND JOB = 'ANALYST';
+54.	
+Display Empno,ename,sal,dname, loc for all the employees whose sal>2000
+SELECT EMPNO, ENAME, SAL, DNAME, LOC FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND SAL > 2000;
+55.	
+Display Ename , sal, Dname ,loc for all employees who are working in “Dallas”
+SELECT ENAME, SAL, DNAME, LOC FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND LOC = 'DALLAS';
+56.	
+Display Ename , sal, Dname ,loc for all employees who are working in “Research ”
+SELECT ENAME, SAL, DNAME, LOC FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND DNAME = 'RESEARCH';
+57.	
+Display empno, Ename, Deptno, Dname for all the employees whose name starts with “J”
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND ENAME LIKE 'J%';
+58.	
+Display empno, Ename, Deptno, Dname for all “Managers”
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND JOB = 'MANAGER';
+59.	
+Display empno, Ename, Deptno, Dname for all the employees whose comm is null
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND COMM IS NULL;
+60.	
+Display empno, Ename, Deptno, Dname for all the employees whose sal in range 1000 to 2000
+SELECT EMPNO, ENAME, EMP.DEPTNO, DNAME FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND SAL BETWEEN 1000 AND 2000;
+end
+
